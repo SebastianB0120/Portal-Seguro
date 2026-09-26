@@ -27,7 +27,7 @@
             </header>
 
             <section class="dashboard-welcome">
-                <div><p class="dashboard-kicker">Sprint 01 / Avance actual</p><h2>El CMS toma forma, {{ auth()->user()->name }}.</h2><p>Un resumen claro para saber qué está construido, qué sigue y cómo comprobamos cada avance.</p><div class="welcome-meta"><span><b>Estado</b> En desarrollo</span><span><b>Ultima revision</b> 15 sep 2026</span></div></div>
+                <div><p class="dashboard-kicker">Sprint 01 / Avance actual</p><h2>El CMS toma forma, {{ auth()->user()->name }}.</h2><p>Un resumen claro para saber qué está construido, qué sigue y cómo comprobamos cada avance.</p><div class="welcome-meta"><span><b>Estado</b> En desarrollo</span><span><b>Última revisión</b> 26 sep 2026</span></div></div>
                 <span class="welcome-shield">84%</span>
             </section>
 
