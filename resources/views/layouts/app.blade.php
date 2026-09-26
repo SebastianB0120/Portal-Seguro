@@ -41,8 +41,8 @@
 
     <footer class="public-footer" id="contacto">
         <div><strong>Portal Seguro</strong><p>Planeación, contenidos y seguridad en un solo espacio.</p></div>
-        <div><span>Contacto</span><a href="mailto:contacto@portal.test">contacto@portal.test</a><a href="tel:+576000000000">+57 600 000 0000</a></div>
-        <div><span>Atención</span><p>Lunes a viernes<br>8:00 a. m. - 5:00 p. m.</p></div>
+        <div><span>Alcance</span><p>Acceso autenticado, dashboard y módulos base del CMS.</p></div>
+        <div><span>Estado</span><p>En desarrollo<br>Funciones de gestión pendientes.</p></div>
     </footer>
 </body>
 </html>
