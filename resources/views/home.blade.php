@@ -92,18 +92,6 @@
                 </li>
             </ol>
 
-            <div class="patch-command-bar">
-                <span class="patch-terminal-mark" aria-hidden="true">&gt;_</span>
-                <div class="patch-command-copy">
-                    <strong>Comandos de referencia</strong>
-                    <small>Ejecutar desde la carpeta raíz del proyecto</small>
-                </div>
-                <code>composer show</code>
-                <code>composer audit</code>
-                <code>composer update proveedor/paquete</code>
-                <code>php artisan test</code>
-                <code>Get-Content storage/logs/laravel.log -Wait</code>
-            </div>
         </section>
 
         <section class="patch-manual" id="manual-parches" aria-labelledby="patch-manual-title">
@@ -111,7 +99,6 @@
                 <p class="public-kicker">Manual de operación / Seguridad de aplicaciones</p>
                 <h2 id="patch-manual-title">Gestión de parches y análisis con OWASP ZAP</h2>
                 <p><strong>Objetivo:</strong> identificar vulnerabilidades, aplicar la corrección correspondiente y verificar que el sistema siga funcionando. Aplica este procedimiento en desarrollo o pruebas antes de publicar cambios.</p>
-                <a class="report-link" href="{{ route('reports.patches') }}">Abrir informe técnico y capturas <span>→</span></a>
             </div>
 
             <div class="patch-glossary" aria-label="Glosario del manual">
