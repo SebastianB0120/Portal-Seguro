@@ -4,9 +4,14 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatchReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/informes/parches', [PatchReportController::class, 'show'])->name('reports.patches');
+Route::post('/informes/parches/zap-scan', [PatchReportController::class, 'scan'])
+    ->middleware('throttle:2,1')
+    ->name('reports.patches.zap-scan');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [LoginController::class, 'create'])->name('login');

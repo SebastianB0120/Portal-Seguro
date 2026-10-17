@@ -44,6 +44,116 @@
             </div>
         </section>
 
+        <section class="patch-plan" id="parches" aria-labelledby="patch-plan-title">
+            <div class="patch-plan-heading">
+                <div>
+                    <p class="public-kicker">Proceso técnico / Laravel 12</p>
+                    <h2 id="patch-plan-title">Plan de gestión de parches</h2>
+                    <p class="patch-plan-intro">Procedimiento para revisar dependencias, corregir vulnerabilidades y comprobar la aplicación antes y después de cada cambio.</p>
+                </div>
+                <a class="patch-plan-version" href="#manual-parches">Abrir procedimiento ↓</a>
+            </div>
+
+            <ol class="patch-stages">
+                <li class="patch-stage">
+                    <span class="patch-stage-number">01</span>
+                    <span class="patch-stage-icon" aria-hidden="true">≡</span>
+                    <h3>Inventario</h3>
+                    <p>Identifica componentes, versiones y dependencias del proyecto.</p>
+                    <code>composer show</code>
+                </li>
+                <li class="patch-stage">
+                    <span class="patch-stage-number">02</span>
+                    <span class="patch-stage-icon" aria-hidden="true">⌕</span>
+                    <h3>Vulnerabilidades</h3>
+                    <p>Revisa avisos de seguridad en las dependencias instaladas.</p>
+                    <code>composer audit</code>
+                </li>
+                <li class="patch-stage">
+                    <span class="patch-stage-number">03</span>
+                    <span class="patch-stage-icon" aria-hidden="true">↓</span>
+                    <h3>Aplicar parche</h3>
+                    <p>Actualiza solo el paquete afectado y revisa el cambio antes de desplegar.</p>
+                    <code>composer update proveedor/paquete</code>
+                </li>
+                <li class="patch-stage">
+                    <span class="patch-stage-number">04</span>
+                    <span class="patch-stage-icon" aria-hidden="true">✓</span>
+                    <h3>Pruebas</h3>
+                    <p>Ejecuta las pruebas automatizadas después de la actualización.</p>
+                    <code>php artisan test</code>
+                </li>
+                <li class="patch-stage">
+                    <span class="patch-stage-number">05</span>
+                    <span class="patch-stage-icon" aria-hidden="true">▥</span>
+                    <h3>Monitoreo</h3>
+                    <p>Revisa los registros de Laravel después de publicar el cambio.</p>
+                    <code>Get-Content storage/logs/laravel.log -Wait</code>
+                </li>
+            </ol>
+
+            <div class="patch-command-bar">
+                <span class="patch-terminal-mark" aria-hidden="true">&gt;_</span>
+                <div class="patch-command-copy">
+                    <strong>Comandos de referencia</strong>
+                    <small>Ejecutar desde la carpeta raíz del proyecto</small>
+                </div>
+                <code>composer show</code>
+                <code>composer audit</code>
+                <code>composer update proveedor/paquete</code>
+                <code>php artisan test</code>
+                <code>Get-Content storage/logs/laravel.log -Wait</code>
+            </div>
+        </section>
+
+        <section class="patch-manual" id="manual-parches" aria-labelledby="patch-manual-title">
+            <div class="patch-manual-heading">
+                <p class="public-kicker">Manual de operación / Seguridad de aplicaciones</p>
+                <h2 id="patch-manual-title">Gestión de parches y análisis con OWASP ZAP</h2>
+                <p><strong>Objetivo:</strong> identificar vulnerabilidades, aplicar la corrección correspondiente y verificar que el sistema siga funcionando. Aplica este procedimiento en desarrollo o pruebas antes de publicar cambios.</p>
+                <a class="report-link" href="{{ route('reports.patches') }}">Abrir informe técnico y capturas <span>→</span></a>
+            </div>
+
+            <div class="patch-glossary" aria-label="Glosario del manual">
+                <article>
+                    <h3>Parche</h3>
+                    <p>Cambio puntual en el código o en una dependencia para corregir un fallo o cerrar una vulnerabilidad. Se prueba antes de publicarlo.</p>
+                </article>
+                <article>
+                    <h3>OWASP ZAP</h3>
+                    <p>Herramienta de análisis dinámico que inspecciona una aplicación web y reporta posibles problemas. No modifica el código ni instala actualizaciones.</p>
+                </article>
+                <article>
+                    <h3>Composer</h3>
+                    <p>Administrador de dependencias PHP. <code>composer audit</code> compara las versiones instaladas con avisos de seguridad conocidos.</p>
+                </article>
+                <article>
+                    <h3>Hallazgo</h3>
+                    <p>Resultado señalado por una auditoría o un escáner. Revisa su evidencia y confirma que sea reproducible antes de decidir la corrección.</p>
+                </article>
+            </div>
+
+            <div class="patch-manual-workflow">
+                <div class="patch-manual-steps">
+                    <h3>Procedimiento</h3>
+                    <ol>
+                        <li><strong>Preparar el cambio.</strong> Trabaja en una rama y verifica el estado del repositorio con <code>git status</code>. Asegúrate de tener una copia recuperable antes de modificar dependencias.</li>
+                        <li><strong>Auditar dependencias.</strong> En la carpeta raíz, ejecuta <code>composer audit</code>. Registra el paquete afectado, el aviso y la versión corregida recomendada.</li>
+                        <li><strong>Analizar la aplicación.</strong> En OWASP ZAP, abre Quick Start, selecciona Automated Scan e introduce la URL de desarrollo, por ejemplo <code>http://127.0.0.1:8000</code>. Revisa las alertas y su evidencia.</li>
+                        <li><strong>Aplicar la corrección.</strong> Sustituye <code>proveedor/paquete</code> por el nombre indicado en la auditoría y ejecuta <code>composer update proveedor/paquete --with-dependencies</code>. Revisa los cambios de <code>composer.lock</code>.</li>
+                        <li><strong>Validar.</strong> Ejecuta <code>php artisan test</code>, vuelve a ejecutar <code>composer audit</code> y repite el análisis de ZAP. No publiques si fallan las pruebas o siguen pendientes alertas críticas confirmadas.</li>
+                        <li><strong>Publicar y supervisar.</strong> Sigue el proceso de despliegue del equipo. En Windows, consulta el registro de Laravel con <code>Get-Content storage/logs/laravel.log -Wait</code>.</li>
+                    </ol>
+                </div>
+                <aside class="patch-manual-note">
+                    <span>CONTROL DE SEGURIDAD</span>
+                    <h3>Analiza solo sistemas autorizados</h3>
+                    <p>Los análisis activos de ZAP envían solicitudes de prueba que pueden cambiar datos. Limita el análisis a desarrollo o pruebas, y obtén autorización antes de evaluar cualquier otro entorno.</p>
+                    <p>ZAP informa posibles problemas; el equipo confirma cada alerta y aplica la corrección. Configura autenticación en ZAP si necesitas revisar páginas protegidas.</p>
+                </aside>
+            </div>
+        </section>
+
         <section class="public-section" id="servicios">
             <div class="public-section-heading"><div><p class="public-kicker">Alcance actual</p><h2>La base del CMS</h2></div><span class="public-index">01 / 03</span></div>
             <div class="public-service-grid">
