@@ -105,7 +105,22 @@ También puedes utilizar el script del proyecto para configuración rápida:
 npm run setup
 ```
 
-## 8. Estructura principal del proyecto
+En VS Code, la configuración `Abrir Portal Seguro` inicia automáticamente el servidor
+de Laravel desde XAMPP y abre el portal en Chrome.
+
+## 8. Pruebas y seguridad
+
+```bash
+php artisan test
+vendor/bin/pint --test
+composer analyse
+composer audit
+```
+
+El escaneo con OWASP ZAP debe limitarse a la aplicación local autorizada. No ejecutes
+escaneos contra sitios de terceros.
+
+## 9. Estructura principal del proyecto
 
 ```text
 app/
@@ -128,7 +143,7 @@ tests/
 - `resources/views/home.blade.php`: vista pública inicial.
 - `resources/views/cms/navigation.blade.php`: menú del CMS.
 
-## 9. Flujo de trabajo recomendado
+## 10. Flujo de trabajo recomendado
 
 El proyecto sigue un enfoque de trabajo orientado a evidencia y control:
 
@@ -138,7 +153,7 @@ El proyecto sigue un enfoque de trabajo orientado a evidencia y control:
 4. Ejecutar pruebas y revisar entregables.
 5. Registrar la evidencia asociada al cambio.
 
-## 10. Seguridad y buenas prácticas
+## 11. Seguridad y buenas prácticas
 
 - Usar autenticación por sesión para rutas protegidas.
 - Mantener validaciones en formularios y entradas.
@@ -146,7 +161,7 @@ El proyecto sigue un enfoque de trabajo orientado a evidencia y control:
 - Evitar exposición de información sensible en vistas públicas.
 - Documentar cada avance con evidencia y trazabilidad.
 
-## 11. Próximo avance sugerido
+## 12. Próximo avance sugerido
 
 El siguiente bloque de trabajo recomendado es:
 
@@ -155,7 +170,7 @@ El siguiente bloque de trabajo recomendado es:
 - consolidar evidencias y pruebas del proyecto;
 - cerrar la trazabilidad del backlog con responsables y entregables reales.
 
-## 12. Licencia
+## 13. Licencia
 
 Este proyecto se encuentra bajo la licencia MIT, como base del ecosistema Laravel.
 

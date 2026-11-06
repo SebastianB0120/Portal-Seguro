@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Laravel: iniciar servidor",
+            "type": "process",
+            "command": "${workspaceFolder}\\..\\..\\php\\php.exe",
+            "args": [
+                "artisan",
+                "serve",
+                "--host=127.0.0.1",
+                "--port=8000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "laravel",
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": ".*Server running on.*"
+                }
+            }
+        }
+    ]
+}

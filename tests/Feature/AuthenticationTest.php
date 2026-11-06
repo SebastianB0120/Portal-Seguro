@@ -40,6 +40,21 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseMissing('users', ['email' => 'portal@example.test']);
     }
 
+    public function test_registration_rejects_a_duplicate_email(): void
+    {
+        User::factory()->create(['email' => 'portal@example.test']);
+
+        $this->post(route('register.store'), [
+            'name' => 'Portal User',
+            'email' => 'portal@example.test',
+            'password' => 'SecurePass123',
+            'password_confirmation' => 'SecurePass123',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+        $this->assertDatabaseCount('users', 1);
+    }
+
     public function test_user_can_log_in_and_log_out(): void
     {
         $user = User::factory()->create(['password' => Hash::make('SecurePass123')]);
@@ -73,5 +88,26 @@ class AuthenticationTest extends TestCase
     {
         $this->get(route('dashboard'))
             ->assertRedirect(route('login'));
+    }
+
+    public function test_cms_modules_redirect_guests_to_login(): void
+    {
+        foreach (['usuarios', 'contenidos', 'multimedia', 'seguridad', 'planeacion', 'evidencias'] as $module) {
+            $this->get(route('cms.module', ['module' => $module]))
+                ->assertRedirect(route('login'));
+        }
+    }
+
+    public function test_unknown_cms_modules_return_not_found(): void
+    {
+        $this->actingAs(User::factory()->create())
+            ->get('/dashboard/no-existe')
+            ->assertNotFound();
+    }
+
+    public function test_login_and_registration_pages_are_available_to_guests(): void
+    {
+        $this->get(route('login'))->assertOk();
+        $this->get(route('register'))->assertOk();
     }
 }
